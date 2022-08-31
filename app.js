@@ -1,7 +1,14 @@
-let nota1 = prompt("Ingrese la nota del primer mes");
-let nota2 = prompt("Ingrese su segunda nota");
-let nota3 = prompt("Ingrese la tercera nota");
 
-let promedio = (parseInt(nota1) + parseInt(nota2) + parseInt(nota3)) /3;
+function impuesto(){
+    let precio = prompt("Ingrese un precio para calcular el IVA o escriba ESC para salir")
+    while (precio != "ESC" && precio != "esc"){
+        let iva = (precio * 21)/100;
+        let total = Number(precio) + iva;
+        console.log(iva);
+        console.log(total);
+        alert(`El impuesto es de ${iva} pesos adicionales y el total es de ${Number (total)}`)
+        break
+    }
+}
 
-alert(promedio);
+impuesto();

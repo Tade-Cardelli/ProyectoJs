@@ -11,3 +11,5 @@ for (let x = 1; x <= 5; x++){
     var nombre = prompt("Ingerse un nombre");
     console.log(`Los nombres son ${nombre}`)
 }
+
+//ejemplo con ifs
