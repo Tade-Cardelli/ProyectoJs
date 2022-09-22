@@ -56,3 +56,24 @@ header{
     display: flex;
     justify-content: center;
 }
+
+.precioProducto{
+    font-weight: 700;
+}
+
+.boton-agregar{
+    font-weight: 700;
+    color: #000;
+    font-size: 18px;
+    padding: 5px;
+    border: none;
+}
+
+.boton-agregar:hover{
+    cursor: pointer;
+}
+
+.boton-agregar:focus{
+    outline: none;
+}
+
