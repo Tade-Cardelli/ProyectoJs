@@ -1,9 +1,12 @@
+/* 
 const productos = [
     {nombre:"teclado", precio: 1000},
     {nombre:"mouse", precio: 850},
     {nombre:"auriculares", precio:2000},
     {nombre:"monitor", precio:5000},
 ];
+
+
 let carrito = []
 function verificacionCompra(){
     let opcion = prompt("Buenas, desea comprar algun componente- si/no")
@@ -65,4 +68,32 @@ function sumaTotal(Total){
     alert(`El total es de ${total} pesos`)
 }
 sumaTotal(agregarAlCarrito(verificacionCompra()))
+
+ 
+
+
+productos = [
+    {id:1 , nombre:"martillo"},
+    {id:2, nombre:"destornillador"},
+    {id:3, nombre:"llave"}
+]
+
+const encontrarProd = (id)=>{
+    const item = productos.find ((prod)=>prod.id === id)
+    return new Promise((resolve,rejected)=>{
+        if(item){
+            resolve(item)
+        } else{
+            rejected("No se encuentra disponible")
+        }
+    })
+} 
+
+encontrarProd(2)
+    .then((item) =>{console.log(item)})
+    .catch((error) =>{console.log(error)})
+*/
+
+
+
 

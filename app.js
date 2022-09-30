@@ -11,6 +11,7 @@ const precioTotal = document.getElementById('precioTotal')
 
 let carrito = []
 
+
 document.addEventListener("DOMContentLoaded", ()=>{
     if(localStorage.getItem("carrito")){
         carrito = JSON.parse(localStorage.getItem("carrito"))
@@ -18,6 +19,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
 })
 
 botonVaciar.addEventListener('click', ()=>{
+    Swal.fire({
+        title: 'Has vaciado el carrito',
+        text: 'Presione aceptar para continuar',
+        confirmButtonText: 'Aceptar'
+      })
     carrito.length = 0
     actualizarCarrito()
 })
@@ -25,15 +31,17 @@ botonVaciar.addEventListener('click', ()=>{
 productos.forEach((producto) => {
     const boton = document.getElementById(`agregar${producto.id}`)
     boton.addEventListener('click',()=>{
+        Swal.fire({
+            title: 'Has agregado un producto al carrito',
+            text: 'Presione aceptar para continuar',
+            icon: 'success',
+            confirmButtonText: 'Aceptar'
+          })
     agregarCarrito(producto.id)
     })
 });
 
-
-
-
 const agregarCarrito = (prodId) =>{
-
         const item = productos.find((prod) => prod.id === prodId)
         carrito.push(item)
         console.log(carrito)
