@@ -1,13 +1,10 @@
-productos = [
-    {id:1, nombre:"Curso hmtl", precio:20000, cantidad:1},
-    {id:2, nombre:"Curso Css", precio:30000, cantidad:1},
-    {id:3, nombre:"Curso JS", precio:50000, cantidad:1}
-]
 
 const carritoContenedor = document.getElementById('carrito-contenedor')
 const botonVaciar = document.getElementById('vaciar-carrito')
 const contadorCarrito = document.getElementById('contadorCarrito')
 const precioTotal = document.getElementById('precioTotal')
+
+const url = './productos.json'
 
 let carrito = []
 
@@ -28,20 +25,26 @@ botonVaciar.addEventListener('click', ()=>{
     actualizarCarrito()
 })
 
-productos.forEach((producto) => {
-    const boton = document.getElementById(`agregar${producto.id}`)
-    boton.addEventListener('click',()=>{
-        Swal.fire({
-            title: 'Has agregado un producto al carrito',
-            text: 'Presione aceptar para continuar',
-            icon: 'success',
-            confirmButtonText: 'Aceptar'
-          })
-    agregarCarrito(producto.id)
-    })
-});
-
-const agregarCarrito = (prodId) =>{
+const agregarProductos = () =>{
+    const lista = document.getElementById('listado')
+    fetch(url)
+        .then((res)=> res.json())
+        .then((productos)=>{
+            productos.forEach((producto) => {
+                const boton = document.getElementById(`agregar${producto.id}`)
+                boton.addEventListener('click',()=>{
+                    Swal.fire({
+                        title: 'Has agregado un producto al carrito',
+                        text: 'Presione aceptar para continuar',
+                        icon: 'success',
+                        confirmButtonText: 'Aceptar'
+                    })
+                agregarCarrito(producto.id,productos)
+                })
+            });
+        })
+}
+const agregarCarrito = (prodId, productos) =>{
         const item = productos.find((prod) => prod.id === prodId)
         carrito.push(item)
         console.log(carrito)
@@ -76,3 +79,5 @@ const actualizarCarrito = ()=>{
     console.log(precioTotal)
 }
 
+
+agregarProductos()

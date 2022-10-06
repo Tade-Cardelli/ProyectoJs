@@ -1,0 +1,5 @@
+[
+    {"id":1, "nombre":"Curso hmtl", "precio":20000, "cantidad":1},
+    {"id":2, "nombre":"Curso Css", "precio":30000, "cantidad":1},
+    {"id":3, "nombre":"Curso JS", "precio":50000, "cantidad":1}
+]
