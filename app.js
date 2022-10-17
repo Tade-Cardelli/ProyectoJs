@@ -39,18 +39,29 @@ const agregarProductos = () =>{
                         icon: 'success',
                         confirmButtonText: 'Aceptar'
                     })
-                agregarCarrito(producto.id,productos)
+                agregarCarrito(producto.id,productos,producto.cantidad)
                 })
             });
         })
 }
 const agregarCarrito = (prodId, productos) =>{
-        const item = productos.find((prod) => prod.id === prodId)
-        carrito.push(item)
-        console.log(carrito)
-        actualizarCarrito()
-
+    const exist = carrito.some(prod => prod.id === prodId)
+    
+    if(exist){
+        const prod = carrito.map(prod =>{
+            if(prod.id===prodId){
+                prod.cantidad++
+            }
+        })
+    } else {
+    
+    const item = productos.find((prod) => prod.id === prodId)
+    carrito.push(item)
 }
+    actualizarCarrito()
+}
+
+
 
 const eliminarDelCarrito=(prodId) =>{
     // Uso find para poder encontrar el producto mediante la Id 
