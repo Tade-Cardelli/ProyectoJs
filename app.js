@@ -9,12 +9,6 @@ const url = './productos.json'
 let carrito = []
 
 
-document.addEventListener("DOMContentLoaded", ()=>{
-    if(localStorage.getItem("carrito")){
-        carrito = JSON.parse(localStorage.getItem("carrito"))
-    }
-})
-
 botonVaciar.addEventListener('click', ()=>{
     Swal.fire({
         title: 'Has vaciado el carrito',
@@ -46,7 +40,6 @@ const agregarProductos = () =>{
 }
 const agregarCarrito = (prodId, productos) =>{
     const exist = carrito.some(prod => prod.id === prodId)
-    
     if(exist){
         const prod = carrito.map(prod =>{
             if(prod.id===prodId){
@@ -60,9 +53,6 @@ const agregarCarrito = (prodId, productos) =>{
 }
     actualizarCarrito()
 }
-
-
-
 const eliminarDelCarrito=(prodId) =>{
     // Uso find para poder encontrar el producto mediante la Id 
     const item = carrito.find((prod) => prod.id === prodId)
@@ -72,23 +62,31 @@ const eliminarDelCarrito=(prodId) =>{
     carrito.splice(indice, 1)
     actualizarCarrito()
 }   
-
 const actualizarCarrito = ()=>{
-    carritoContenedor.innerHTML = ""
-    carrito.forEach((prod) =>{
-        const div = document.createElement('div')
-        div.innerHTML = `
-        <p>Precio: ${prod.precio}</p>
-        <p>Cantidad: <span id:"cantidad">${prod.cantidad}</span></p>
-        <button onclick = "eliminarDelCarrito(${prod.id})">Eliminar</button>
-        `
-        carritoContenedor.appendChild(div)
-        localStorage.setItem("carrito", JSON.stringify(carrito))
-    })
-    contadorCarrito.innerText = carrito.length
-    precioTotal.innerText = carrito.reduce((acc,prod) => acc + prod.precio, 0) 
-    console.log(precioTotal)
+    
+        carritoContenedor.innerHTML = ""
+        carrito.forEach((prod) =>{
+            const div = document.createElement('div')
+            div.innerHTML = `
+            <p>Precio: ${prod.precio}</p>
+            <p>Cantidad: <span id:"cantidad">${prod.cantidad}</span></p>
+            <button onclick = "eliminarDelCarrito(${prod.id})">Eliminar</button>
+            `
+            carritoContenedor.appendChild(div)
+            localStorage.setItem("carrito", JSON.stringify(carrito))
+        })
+        contadorCarrito.innerText = carrito.length
+        //Usa metodo reduce para sumar el precio
+        precioTotal.innerText = carrito.reduce((acc,prod) => acc + prod.precio * prod.cantidad, 0) 
+    
 }
 
+// Al cargar la pagina obtiene el carrito de local storage y lo guarda en el arreglo
+const carritoEnLocalStorage = JSON.parse(localStorage.getItem('carrito'));
+if (carritoEnLocalStorage) {
+    carrito = carritoEnLocalStorage; 
+}
 
+actualizarCarrito()
 agregarProductos()
+
